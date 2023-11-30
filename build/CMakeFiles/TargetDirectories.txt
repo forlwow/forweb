@@ -1,0 +1,14 @@
+/home/webserver/web_server/build/CMakeFiles/web_server.dir
+/home/webserver/web_server/build/CMakeFiles/edit_cache.dir
+/home/webserver/web_server/build/CMakeFiles/rebuild_cache.dir
+/home/webserver/web_server/build/server/CMakeFiles/edit_cache.dir
+/home/webserver/web_server/build/server/CMakeFiles/rebuild_cache.dir
+/home/webserver/web_server/build/server/log/CMakeFiles/log.dir
+/home/webserver/web_server/build/server/log/CMakeFiles/edit_cache.dir
+/home/webserver/web_server/build/server/log/CMakeFiles/rebuild_cache.dir
+/home/webserver/web_server/build/server/util/CMakeFiles/util.dir
+/home/webserver/web_server/build/server/util/CMakeFiles/edit_cache.dir
+/home/webserver/web_server/build/server/util/CMakeFiles/rebuild_cache.dir
+/home/webserver/web_server/build/server/ethread/CMakeFiles/ethread.dir
+/home/webserver/web_server/build/server/ethread/CMakeFiles/edit_cache.dir
+/home/webserver/web_server/build/server/ethread/CMakeFiles/rebuild_cache.dir

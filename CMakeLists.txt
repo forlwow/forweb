@@ -1,0 +1,35 @@
+cmake_minimum_required(VERSION 3.25)
+
+project(web_server VERSION 0.1 LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON) 
+
+set(CMAKE_CXX_COMPILER /usr/local/bin/g++)
+set(CMAKE_C_COMPILER /usr/local/bin/gcc)
+
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
+
+set(CMAKE_BUILD_TYPE "Debug")
+set(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -w -g2 -ggdb")
+add_definitions(-D_GLIBCXX_USE_CXX11_ABI=1)
+
+include_directories(${PROJECT_SOURCE_DIR}/server/log/inc)
+include_directories(${PROJECT_SOURCE_DIR}/server/util/inc)
+include_directories(${PROJECT_SOURCE_DIR}/server/ethread/inc)
+
+aux_source_directory(${PROJECT_SOURCE_DIR}/server src_dir)
+
+link_directories(${PROJECT_SOURCE_DIR}/lib)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/server)
+
+add_executable(
+        ${PROJECT_NAME}
+        ${src_dir}
+)
+
+target_link_libraries(${PROJECT_NAME} log util ethread)
+target_link_libraries(${PROJECT_NAME} pthread)
+
+

@@ -1,0 +1,1 @@
+/usr/local/bin/g++ -fPIC  -O0 -w -g2 -ggdb -shared -Wl,-soname,libutil.so -o /home/webserver/web_server/lib/libutil.so CMakeFiles/util.dir/src/range.cpp.o   -L/home/webserver/web_server/lib 
