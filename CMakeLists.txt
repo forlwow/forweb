@@ -12,8 +12,7 @@ set(CMAKE_C_COMPILER /usr/local/bin/gcc)
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
 set(CMAKE_BUILD_TYPE "Debug")
-set(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -w -g2 -ggdb")
-add_definitions(-D_GLIBCXX_USE_CXX11_ABI=1)
+set(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -w -g2 -ggdb -std=c++20")
 
 include_directories(${PROJECT_SOURCE_DIR}/server/log/inc)
 include_directories(${PROJECT_SOURCE_DIR}/server/util/inc)

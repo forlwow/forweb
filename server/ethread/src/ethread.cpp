@@ -4,15 +4,18 @@
 #include <memory>
 #include <pthread.h>
 #include <stdexcept>
+#include <sys/syscall.h>
 #include <thread>
+#include <unistd.h>
 
 
 namespace server {
 
 static Logger::ptr g_logger = CreateStdLogger("system");
 
-static thread_local EThread* t_thread = nullptr;
-static thread_local std::string t_thread_name = "UNKNOW";
+thread_local EThread* t_thread = nullptr;
+thread_local std::string t_thread_name = "UNKNOW";
+thread_local int t_thread_id = -1;
 
 EThread* EThread::GetThis(){
     return t_thread;
@@ -29,7 +32,9 @@ void EThread::SetName(const std::string &name){
     t_thread_name = name;
 }
 
-EThread::EThread(std::function<void()> cb, const std::string& name){
+EThread::EThread(std::function<void()> cb, const std::string& name)
+    :m_cb(cb), m_name(name)
+{
     if (name.empty()){
         m_name = "UNKNOW";
     }
@@ -47,12 +52,17 @@ EThread::~EThread(){
 
 void* EThread::run(void *arg){
     EThread* thread = (EThread*)arg;
+
     t_thread = thread;
-    thread->m_id = std::this_thread::get_id();
+    t_thread_name = thread->m_name;
+    t_thread_id = syscall(SYS_gettid);
     pthread_setname_np(pthread_self(), thread->m_name.substr(0, 15).c_str());
+
+    thread->m_id = t_thread_id;
 
     std::function<void()> cb;
     cb.swap(thread->m_cb);
+    cb();
     return 0;
 }
 

@@ -17,6 +17,7 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
   /usr/include/locale.h \
   /usr/include/pthread.h \
   /usr/include/sched.h \
+  /usr/include/semaphore.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdint.h \
   /usr/include/stdio.h \
@@ -49,6 +50,7 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
   /usr/include/x86_64-linux-gnu/bits/sched.h \
   /usr/include/x86_64-linux-gnu/bits/select.h \
+  /usr/include/x86_64-linux-gnu/bits/semaphore.h \
   /usr/include/x86_64-linux-gnu/bits/setjmp.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
@@ -102,8 +104,10 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
   /usr/include/x86_64-linux-gnu/sys/cdefs.h \
   /usr/include/x86_64-linux-gnu/sys/select.h \
   /usr/include/x86_64-linux-gnu/sys/syscall.h \
+  /usr/include/x86_64-linux-gnu/sys/time.h \
   /usr/include/x86_64-linux-gnu/sys/types.h \
   /usr/local/include/c++/13.1.0/array \
+  /usr/local/include/c++/13.1.0/atomic \
   /usr/local/include/c++/13.1.0/backward/auto_ptr.h \
   /usr/local/include/c++/13.1.0/backward/binders.h \
   /usr/local/include/c++/13.1.0/bit \
@@ -114,6 +118,7 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
   /usr/local/include/c++/13.1.0/bits/allocator.h \
   /usr/local/include/c++/13.1.0/bits/atomic_base.h \
   /usr/local/include/c++/13.1.0/bits/atomic_lockfree_defines.h \
+  /usr/local/include/c++/13.1.0/bits/atomic_timed_wait.h \
   /usr/local/include/c++/13.1.0/bits/atomic_wait.h \
   /usr/local/include/c++/13.1.0/bits/basic_ios.h \
   /usr/local/include/c++/13.1.0/bits/basic_ios.tcc \
@@ -122,7 +127,6 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
   /usr/local/include/c++/13.1.0/bits/char_traits.h \
   /usr/local/include/c++/13.1.0/bits/charconv.h \
   /usr/local/include/c++/13.1.0/bits/chrono.h \
-  /usr/local/include/c++/13.1.0/bits/chrono_io.h \
   /usr/local/include/c++/13.1.0/bits/codecvt.h \
   /usr/local/include/c++/13.1.0/bits/concept_check.h \
   /usr/local/include/c++/13.1.0/bits/cpp_type_traits.h \
@@ -174,6 +178,7 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
   /usr/local/include/c++/13.1.0/bits/ranges_util.h \
   /usr/local/include/c++/13.1.0/bits/refwrap.h \
   /usr/local/include/c++/13.1.0/bits/requires_hosted.h \
+  /usr/local/include/c++/13.1.0/bits/semaphore_base.h \
   /usr/local/include/c++/13.1.0/bits/shared_ptr.h \
   /usr/local/include/c++/13.1.0/bits/shared_ptr_atomic.h \
   /usr/local/include/c++/13.1.0/bits/shared_ptr_base.h \
@@ -181,6 +186,7 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
   /usr/local/include/c++/13.1.0/bits/std_abs.h \
   /usr/local/include/c++/13.1.0/bits/std_function.h \
   /usr/local/include/c++/13.1.0/bits/std_mutex.h \
+  /usr/local/include/c++/13.1.0/bits/std_thread.h \
   /usr/local/include/c++/13.1.0/bits/stl_algo.h \
   /usr/local/include/c++/13.1.0/bits/stl_algobase.h \
   /usr/local/include/c++/13.1.0/bits/stl_bvector.h \
@@ -204,6 +210,7 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
   /usr/local/include/c++/13.1.0/bits/streambuf_iterator.h \
   /usr/local/include/c++/13.1.0/bits/string_view.tcc \
   /usr/local/include/c++/13.1.0/bits/stringfwd.h \
+  /usr/local/include/c++/13.1.0/bits/this_thread_sleep.h \
   /usr/local/include/c++/13.1.0/bits/uniform_int_dist.h \
   /usr/local/include/c++/13.1.0/bits/unique_ptr.h \
   /usr/local/include/c++/13.1.0/bits/unordered_map.h \
@@ -213,8 +220,6 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
   /usr/local/include/c++/13.1.0/bits/vector.tcc \
   /usr/local/include/c++/13.1.0/cctype \
   /usr/local/include/c++/13.1.0/cerrno \
-  /usr/local/include/c++/13.1.0/charconv \
-  /usr/local/include/c++/13.1.0/chrono \
   /usr/local/include/c++/13.1.0/climits \
   /usr/local/include/c++/13.1.0/clocale \
   /usr/local/include/c++/13.1.0/compare \
@@ -236,7 +241,6 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
   /usr/local/include/c++/13.1.0/ext/numeric_traits.h \
   /usr/local/include/c++/13.1.0/ext/string_conversions.h \
   /usr/local/include/c++/13.1.0/ext/type_traits.h \
-  /usr/local/include/c++/13.1.0/format \
   /usr/local/include/c++/13.1.0/fstream \
   /usr/local/include/c++/13.1.0/functional \
   /usr/local/include/c++/13.1.0/initializer_list \
@@ -252,25 +256,25 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
   /usr/local/include/c++/13.1.0/memory \
   /usr/local/include/c++/13.1.0/new \
   /usr/local/include/c++/13.1.0/numbers \
-  /usr/local/include/c++/13.1.0/optional \
   /usr/local/include/c++/13.1.0/ostream \
   /usr/local/include/c++/13.1.0/pstl/execution_defs.h \
   /usr/local/include/c++/13.1.0/pstl/glue_memory_defs.h \
   /usr/local/include/c++/13.1.0/pstl/pstl_config.h \
   /usr/local/include/c++/13.1.0/ratio \
-  /usr/local/include/c++/13.1.0/span \
+  /usr/local/include/c++/13.1.0/semaphore \
   /usr/local/include/c++/13.1.0/sstream \
   /usr/local/include/c++/13.1.0/stdexcept \
+  /usr/local/include/c++/13.1.0/stop_token \
   /usr/local/include/c++/13.1.0/streambuf \
   /usr/local/include/c++/13.1.0/string \
   /usr/local/include/c++/13.1.0/string_view \
   /usr/local/include/c++/13.1.0/system_error \
+  /usr/local/include/c++/13.1.0/thread \
   /usr/local/include/c++/13.1.0/tuple \
   /usr/local/include/c++/13.1.0/type_traits \
   /usr/local/include/c++/13.1.0/typeinfo \
   /usr/local/include/c++/13.1.0/unordered_map \
   /usr/local/include/c++/13.1.0/utility \
-  /usr/local/include/c++/13.1.0/variant \
   /usr/local/include/c++/13.1.0/vector \
   /usr/local/include/c++/13.1.0/x86_64-pc-linux-gnu/bits/atomic_word.h \
   /usr/local/include/c++/13.1.0/x86_64-pc-linux-gnu/bits/basic_file.h \
@@ -297,8 +301,6 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
 
 
 /usr/local/lib/gcc/x86_64-pc-linux-gnu/13.1.0/include/syslimits.h:
-
-/usr/local/lib/gcc/x86_64-pc-linux-gnu/13.1.0/include/stdint.h:
 
 /usr/local/lib/gcc/x86_64-pc-linux-gnu/13.1.0/include/stdarg.h:
 
@@ -334,6 +336,8 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
 
 /usr/local/include/c++/13.1.0/tuple:
 
+/usr/local/include/c++/13.1.0/thread:
+
 /usr/local/include/c++/13.1.0/system_error:
 
 /usr/local/include/c++/13.1.0/string_view:
@@ -344,13 +348,11 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
 
 /usr/local/include/c++/13.1.0/stdexcept:
 
-/usr/local/include/c++/13.1.0/bits/cxxabi_init_exception.h:
+/usr/local/lib/gcc/x86_64-pc-linux-gnu/13.1.0/include/stdint.h:
 
-/usr/local/include/c++/13.1.0/bits/cpp_type_traits.h:
+/usr/local/include/c++/13.1.0/semaphore:
 
-/usr/local/include/c++/13.1.0/bits/align.h:
-
-/usr/local/include/c++/13.1.0/bits/concept_check.h:
+/usr/local/include/c++/13.1.0/ratio:
 
 /usr/local/include/c++/13.1.0/bits/codecvt.h:
 
@@ -360,15 +362,15 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
 
 /usr/local/include/c++/13.1.0/bits/ranges_base.h:
 
-/usr/local/include/c++/13.1.0/bits/basic_ios.h:
-
 /usr/local/include/c++/13.1.0/bits/atomic_lockfree_defines.h:
 
 /usr/local/include/c++/13.1.0/bits/atomic_wait.h:
 
 /usr/local/include/c++/13.1.0/bits/basic_string.h:
 
-/usr/local/include/c++/13.1.0/chrono:
+/usr/local/include/c++/13.1.0/bits/align.h:
+
+/usr/local/include/c++/13.1.0/bits/cpp_type_traits.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
 
@@ -378,9 +380,9 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
 
 /usr/include/x86_64-linux-gnu/sys/types.h:
 
-/usr/local/include/c++/13.1.0/memory:
+/usr/local/include/c++/13.1.0/bits/basic_ios.h:
 
-/usr/include/x86_64-linux-gnu/sys/syscall.h:
+/usr/include/x86_64-linux-gnu/sys/time.h:
 
 /usr/local/include/c++/13.1.0/bits/stl_heap.h:
 
@@ -394,17 +396,19 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
 
 /usr/local/include/c++/13.1.0/bits/locale_conv.h:
 
-/usr/local/include/c++/13.1.0/exception:
-
 /usr/include/x86_64-linux-gnu/bits/xopen_lim.h:
 
-/usr/include/x86_64-linux-gnu/bits/wordsize.h:
+/usr/local/include/c++/13.1.0/pstl/glue_memory_defs.h:
+
+/usr/include/x86_64-linux-gnu/bits/wchar.h:
+
+/usr/local/include/c++/13.1.0/pstl/pstl_config.h:
+
+/usr/include/x86_64-linux-gnu/bits/local_lim.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/waitflags.h:
-
-/usr/local/include/c++/13.1.0/ratio:
 
 /usr/include/x86_64-linux-gnu/bits/typesizes.h:
 
@@ -417,10 +421,6 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
 /usr/include/x86_64-linux-gnu/bits/sys_errlist.h:
 
 /usr/include/x86_64-linux-gnu/asm/errno.h:
-
-/usr/local/include/c++/13.1.0/bits/stl_uninitialized.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
 
@@ -456,8 +456,6 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
 
 /usr/local/include/c++/13.1.0/ext/atomicity.h:
 
-/usr/local/include/c++/13.1.0/optional:
-
 /usr/include/x86_64-linux-gnu/bits/types/FILE.h:
 
 /usr/include/x86_64-linux-gnu/bits/types.h:
@@ -473,6 +471,8 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
 /usr/local/include/c++/13.1.0/bits/uses_allocator_args.h:
 
 /usr/local/include/c++/13.1.0/debug/debug.h:
+
+/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
 
 /usr/local/include/c++/13.1.0/x86_64-pc-linux-gnu/bits/time_members.h:
 
@@ -503,8 +503,6 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
 /usr/include/libintl.h:
 
 /usr/include/x86_64-linux-gnu/bits/endianness.h:
-
-/usr/local/include/c++/13.1.0/variant:
 
 /usr/local/include/c++/13.1.0/bits/unordered_map.h:
 
@@ -552,6 +550,8 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
 
 /usr/local/include/c++/13.1.0/bits/stl_bvector.h:
 
+/usr/include/semaphore.h:
+
 /usr/include/x86_64-linux-gnu/asm/unistd_64.h:
 
 /usr/include/alloca.h:
@@ -575,10 +575,6 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
 /usr/include/locale.h:
 
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h:
-
-/usr/local/include/c++/13.1.0/bits/chrono_io.h:
-
-/usr/local/include/c++/13.1.0/span:
 
 /usr/include/stdlib.h:
 
@@ -610,10 +606,6 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
 
 /usr/include/x86_64-linux-gnu/bits/getopt_core.h:
 
-/usr/local/include/c++/13.1.0/bits/cxxabi_forced.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
-
 /usr/include/stdio.h:
 
 /usr/local/include/c++/13.1.0/bits/unique_ptr.h:
@@ -634,6 +626,14 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
 
 /usr/local/include/c++/13.1.0/ext/alloc_traits.h:
 
+/usr/include/x86_64-linux-gnu/bits/wordsize.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
+
+/usr/local/include/c++/13.1.0/bits/stl_uninitialized.h:
+
+/usr/include/x86_64-linux-gnu/bits/semaphore.h:
+
 /usr/local/include/c++/13.1.0/bits/basic_ios.tcc:
 
 /usr/local/include/c++/13.1.0/bits/ios_base.h:
@@ -641,6 +641,8 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
 /usr/local/include/c++/13.1.0/bits/requires_hosted.h:
 
 /usr/include/x86_64-linux-gnu/bits/struct_mutex.h:
+
+/usr/local/include/c++/13.1.0/bits/atomic_timed_wait.h:
 
 /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
 
@@ -658,13 +660,27 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
 
 /usr/include/x86_64-linux-gnu/bits/syscall.h:
 
-/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
+/usr/local/include/c++/13.1.0/bits/semaphore_base.h:
+
+/usr/local/include/c++/13.1.0/bits/concept_check.h:
+
+/usr/include/x86_64-linux-gnu/sys/syscall.h:
+
+/usr/local/include/c++/13.1.0/memory:
+
+/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
+
+/usr/local/include/c++/13.1.0/bits/cxxabi_forced.h:
+
+/usr/local/include/c++/13.1.0/bits/cxxabi_init_exception.h:
 
 /usr/local/include/c++/13.1.0/bits/exception.h:
 
 /usr/local/include/c++/13.1.0/bits/alloc_traits.h:
 
 /usr/local/include/c++/13.1.0/bits/exception_defines.h:
+
+/usr/local/include/c++/13.1.0/bits/functional_hash.h:
 
 /usr/local/include/c++/13.1.0/bits/hash_bytes.h:
 
@@ -681,6 +697,10 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
 /usr/local/include/c++/13.1.0/bits/uses_allocator.h:
 
 /usr/local/include/c++/13.1.0/bits/list.tcc:
+
+/usr/local/include/c++/13.1.0/bits/ranges_algobase.h:
+
+/usr/local/include/c++/13.1.0/cstdlib:
 
 /usr/local/include/c++/13.1.0/bits/locale_classes.h:
 
@@ -732,10 +752,6 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
 
 /usr/local/include/c++/13.1.0/bits/memoryfwd.h:
 
-/usr/local/include/c++/13.1.0/bits/functional_hash.h:
-
-/usr/local/include/c++/13.1.0/format:
-
 /usr/local/lib/gcc/x86_64-pc-linux-gnu/13.1.0/include/stddef.h:
 
 /usr/local/include/c++/13.1.0/bits/nested_exception.h:
@@ -774,6 +790,12 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
 
 /usr/local/include/c++/13.1.0/bits/std_mutex.h:
 
+/usr/local/include/c++/13.1.0/bits/std_thread.h:
+
+/usr/local/include/c++/13.1.0/bits/stl_iterator_base_funcs.h:
+
+/usr/local/include/c++/13.1.0/atomic:
+
 /usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
 
 /usr/local/include/c++/13.1.0/bits/stl_algo.h:
@@ -783,8 +805,6 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
 /usr/local/include/c++/13.1.0/bits/stl_iterator.h:
 
 /usr/local/include/c++/13.1.0/iosfwd:
-
-/usr/local/include/c++/13.1.0/bits/stl_iterator_base_funcs.h:
 
 /usr/include/x86_64-linux-gnu/bits/select.h:
 
@@ -814,19 +834,15 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
 
 /usr/local/include/c++/13.1.0/bits/stringfwd.h:
 
+/usr/local/include/c++/13.1.0/exception:
+
+/usr/local/include/c++/13.1.0/bits/this_thread_sleep.h:
+
 /usr/local/include/c++/13.1.0/bits/utility.h:
 
 /usr/local/include/c++/13.1.0/bits/vector.tcc:
 
 /usr/local/include/c++/13.1.0/cerrno:
-
-/usr/local/include/c++/13.1.0/bits/ranges_algobase.h:
-
-/usr/local/include/c++/13.1.0/cstdlib:
-
-/usr/local/include/c++/13.1.0/charconv:
-
-/usr/local/include/c++/13.1.0/ext/string_conversions.h:
 
 /usr/local/include/c++/13.1.0/climits:
 
@@ -836,6 +852,8 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
 
 /usr/local/include/c++/13.1.0/cstdint:
 
+/usr/local/include/c++/13.1.0/stop_token:
+
 /usr/local/include/c++/13.1.0/cwchar:
 
 /usr/local/include/c++/13.1.0/ext/concurrence.h:
@@ -843,6 +861,8 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
 /usr/local/include/c++/13.1.0/debug/assertions.h:
 
 /usr/local/include/c++/13.1.0/ext/numeric_traits.h:
+
+/usr/local/include/c++/13.1.0/ext/string_conversions.h:
 
 /usr/local/include/c++/13.1.0/iomanip:
 
@@ -873,11 +893,3 @@ server/log/CMakeFiles/log.dir/src/log.cpp.o: /home/webserver/web_server/server/l
 /usr/local/include/c++/13.1.0/numbers:
 
 /usr/local/include/c++/13.1.0/pstl/execution_defs.h:
-
-/usr/include/x86_64-linux-gnu/bits/wchar.h:
-
-/usr/local/include/c++/13.1.0/pstl/glue_memory_defs.h:
-
-/usr/include/x86_64-linux-gnu/bits/local_lim.h:
-
-/usr/local/include/c++/13.1.0/pstl/pstl_config.h:

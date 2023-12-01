@@ -3,7 +3,6 @@
 #include <functional>
 
 #include <iomanip>
-#include <chrono>
 #include <cstdio>
 #include <cstdlib>
 #include <utility>
@@ -192,12 +191,6 @@ LogEventWrap::LogEventWrap(LogEvent::ptr e)
 
 LogEventWrap::~LogEventWrap(){
     m_event->getLogger()->log(m_event);
-}
-
-template<typename T>
-LogEventWrap& LogEventWrap::operator<<(T&& arg){
-    m_event->getSS().append(std::forward<T>(arg));
-    return *this;
 }
 
 

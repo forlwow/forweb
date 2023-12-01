@@ -8,6 +8,7 @@
 #include <thread>
 #include <vector>
 #include <unistd.h>
+#include <string>
 
 
 using namespace std;
@@ -16,6 +17,7 @@ void test1();
 void test2();
 
 int main(){
+    test1();
     return 0;
 }
 
@@ -25,9 +27,9 @@ void test1(){
     auto log = CreateStdLogger("root");
     auto fun1 = std::function<void()>(
             [&](){
-                SERVER_LOG_INFO(log) << "name" << server::EThread::GetName()
-                << "this.name: " << server::EThread::GetThis()->getName()
-                << "id: " << std::this_thread::get_id()
+                SERVER_LOG_INFO(log) << "name:" << server::EThread::GetName() << " "
+                << "this.name: " << server::EThread::GetThis()->getName() << " "
+                << "id: " << syscall(gettid()) << " "
                 << "this.id: " << server::EThread::GetThis()->getId();
             }
         );

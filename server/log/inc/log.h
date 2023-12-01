@@ -1,6 +1,7 @@
 #ifndef SERVER_LOG_H
 #define SERVER_LOG_H
 
+#include <functional>
 #include <string>
 #include <vector>
 #include <fstream>
@@ -8,16 +9,18 @@
 #include <map>
 #include <list>
 #include <memory>
-
+#include <thread>
 #include <cstdio>
 
 namespace server{
+
+extern thread_local int t_thread_id;
 
 #define SERVER_LOG_LEVEL(logger, level)  \
     if(logger->getLevel() <= level) \
         server::LogEventWrap(server::LogEvent::ptr(\
                     new server::LogEvent(logger, level, \
-                    __FILE__, __LINE__, 0, 1, 2, time(0))))
+                    __FILE__, __LINE__, 0, server::t_thread_id, 2, time(0))))
 
 #define SERVER_LOG_DEBUG(logger) SERVER_LOG_LEVEL(logger, server::LogLevel::DEBUG)
 #define SERVER_LOG_INFO(logger) SERVER_LOG_LEVEL(logger, server::LogLevel::INFO)
@@ -123,8 +126,20 @@ public:
     auto& getSS() {return m_event->getSS();}
     auto getEvent() {return m_event;}
 
+    inline LogEventWrap& operator<<(const std::string& str){
+        m_event->getSS().append(str);
+        return *this;
+    }
+    inline LogEventWrap& operator<<(const char* c){
+        m_event->getSS().append(c);
+        return *this;
+    }
     template<typename T>
-    LogEventWrap& operator<<(T&&);
+    LogEventWrap& operator<<(T arg){
+        m_event->getSS().append(std::to_string(arg));
+        return *this;
+    }
+
     template<typename T>
     auto &operator()(T) {return this;}
 
