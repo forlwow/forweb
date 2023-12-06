@@ -2,11 +2,13 @@
 #define ETHREAD_H
 
 #include <cstdint>
+#include <shared_mutex>
 #include <string>
 #include <thread>
 #include <functional>
 #include <memory>
 #include <pthread.h>
+#include <mutex>
 
 namespace server {
 
@@ -22,6 +24,118 @@ private:
     Semaphore(const Semaphore&&)=delete;
     Semaphore& operator=(const Semaphore&)=delete;
     Semaphore& operator=(const Semaphore&&)=delete;
+private:
+    sem_t m_semaphore;
+};
+
+template<typename T>
+struct SemLockGuard{
+    SemLockGuard(T& mutex)
+        :m_mutex(mutex)
+    {
+        m_mutex.lock();
+        m_locked = true;
+    }
+    ~SemLockGuard(){
+        unlock();
+    }
+
+    void lock(){
+        if (!m_locked){
+            m_mutex.lock();
+            m_locked = true;
+        }
+    }
+    void unlock(){
+        if (m_locked){
+            m_locked = false;
+            m_mutex.unlock();
+        }
+    }
+
+private:
+    T& m_mutex;
+    bool m_locked;
+};
+
+template<typename T>
+struct ReadLockGuard{
+    ReadLockGuard(T& mutex)
+        :m_mutex(mutex)
+    {
+        m_mutex.rdlock();
+        m_locked = true;
+    }
+    ~ReadLockGuard(){
+        unlock();
+    }
+
+    void lock(){
+        if (!m_locked){
+            m_mutex.rdlock();
+            m_locked = true;
+        }
+    }
+    void unlock(){
+        if (m_locked){
+            m_locked = false;
+            m_mutex.unlock();
+        }
+    }
+private:
+    T& m_mutex;
+    bool m_locked;
+};
+template<typename T>
+struct WriteLockGuard{
+    WriteLockGuard(T& mutex)
+        :m_mutex(mutex)
+    {
+        m_mutex.wrlock();
+        m_locked = true;
+    }
+    ~WriteLockGuard(){
+        unlock();
+    }
+
+    void lock(){
+        if (!m_locked){
+            m_mutex.wrlock();
+            m_locked = true;
+        }
+    }
+    void unlock(){
+        if (m_locked){
+            m_locked = false;
+            m_mutex.unlock();
+        }
+    }
+
+private:
+    T& m_mutex;
+    bool m_locked;
+};
+
+class RWMutex{
+public:
+    RWMutex(){
+        pthread_rwlock_init(&m_lock, nullptr);
+    }
+    ~RWMutex(){
+        pthread_rwlock_destroy(&m_lock);
+    }
+    void rdlock(){
+        pthread_rwlock_rdlock(&m_lock);
+    }
+    void wrlock(){
+        pthread_rwlock_wrlock(&m_lock);
+    }
+    void unlock(){
+        pthread_rwlock_unlock(&m_lock);
+    }
+
+private:
+    pthread_rwlock_t m_lock;
 };
 
 
@@ -53,11 +167,12 @@ private:
 
     static void* run(void *arg);
 private:
-    int m_id;
-    std::thread m_thread;
-    std::function<void()> m_cb;
-    std::string m_name;
+    int m_id;                       //
+    std::thread m_thread;           //
+    std::function<void()> m_cb;     //
+    std::string m_name;             // 
 
+    Semaphore m_semaphore;          // 用于等待启动的信号量
 };
 
 }

@@ -5,7 +5,6 @@
 #include <chrono>
 #include <memory>
 #include <string>
-#include <thread>
 #include <vector>
 #include <unistd.h>
 #include <string>
@@ -25,12 +24,22 @@ int main(){
 
 void test1(){
     auto log = CreateStdLogger("root");
+    SERVER_LOG_INFO(log) << "test begin";
+    int count = 0;
     auto fun1 = std::function<void()>(
             [&](){
-                SERVER_LOG_INFO(log) << "name:" << server::EThread::GetName() << " "
-                << "this.name: " << server::EThread::GetThis()->getName() << " "
-                << "id: " << syscall(gettid()) << " "
-                << "this.id: " << server::EThread::GetThis()->getId();
+                SERVER_LOG_INFO(log) 
+                << "name:" 
+                << server::EThread::GetName() << " "
+                << "this.name: " 
+                << server::EThread::GetThis()->getName() << " "
+                << "id: " 
+                << syscall(SYS_gettid) << " "
+                << "this.id: " 
+                << server::EThread::GetThis()->getId();
+                for (int i=0; i<1e5; ++i){
+                    ++count;
+                }
             }
         );
     std::vector<server::EThread::ptr> thp;
@@ -40,6 +49,7 @@ void test1(){
     for (auto &item: thp){
         item->join();
     }
+    SERVER_LOG_INFO(log) << "test end " << count;
 }
 
 void test2(){

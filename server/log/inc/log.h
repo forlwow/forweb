@@ -1,7 +1,6 @@
 #ifndef SERVER_LOG_H
 #define SERVER_LOG_H
 
-#include <functional>
 #include <string>
 #include <vector>
 #include <fstream>
@@ -9,7 +8,6 @@
 #include <map>
 #include <list>
 #include <memory>
-#include <thread>
 #include <cstdio>
 
 namespace server{

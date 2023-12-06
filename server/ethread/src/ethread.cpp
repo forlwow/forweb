@@ -1,8 +1,10 @@
 #include "ethread.h"
 #include "log.h"
+#include <cstdint>
 #include <functional>
 #include <memory>
 #include <pthread.h>
+#include <semaphore.h>
 #include <stdexcept>
 #include <sys/syscall.h>
 #include <thread>
@@ -16,6 +18,29 @@ static Logger::ptr g_logger = CreateStdLogger("system");
 thread_local EThread* t_thread = nullptr;
 thread_local std::string t_thread_name = "UNKNOW";
 thread_local int t_thread_id = -1;
+
+Semaphore::Semaphore(uint32_t count){
+    if (sem_init(&m_semaphore, 0, count)){
+        throw std::logic_error("sem_init error");
+    }
+}
+
+Semaphore::~Semaphore(){
+    sem_destroy(&m_semaphore);
+}
+
+void Semaphore::wait(){
+    if(sem_wait(&m_semaphore)){
+        throw std::logic_error("sem_wait error");
+    }
+}
+
+void Semaphore::notify(){
+    if(sem_post(&m_semaphore)){
+        throw std::logic_error("sem_post error");
+    }
+}
+
 
 EThread* EThread::GetThis(){
     return t_thread;
@@ -43,6 +68,8 @@ EThread::EThread(std::function<void()> cb, const std::string& name)
         SERVER_LOG_ERROR(g_logger) << "create thread error";
         throw std::logic_error("thread create error");
     }
+
+    m_semaphore.wait();     // 保证在线程构造完毕开始运行后才完成构造
 }
 
 EThread::~EThread(){
@@ -62,13 +89,15 @@ void* EThread::run(void *arg){
 
     std::function<void()> cb;
     cb.swap(thread->m_cb);
+
+    thread->m_semaphore.notify();       // 初始化完成 主线程返回
     cb();
     return 0;
 }
 
 void EThread::join(){
     if(m_thread.joinable())
-        m_thread.joinable();
+        m_thread.join();
 }
 
 }
